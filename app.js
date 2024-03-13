@@ -45,9 +45,7 @@ function shuffle(array) {
 
 document.body.onload = startGame();
 
-
 function startGame(){
-
  
     openedCards = [];
 
@@ -58,16 +56,9 @@ function startGame(){
       const iconEl = document.createElement("i");
       iconEl.classList = `fa-solid fa-${shuffledCards[i]}`
       card[i].appendChild(iconEl)
-  
-      //  icons.innerHTML = "";
-       // [].forEach.call(cards, function(item) {
-       //     icons.appendChild(item);
-       // });
-       // cards[i].classList.remove("show", "open", "match", "disabled");
     }
     
 }
-
 
 var displayCard = function (){
     this.classList.add("open");
@@ -90,27 +81,8 @@ function cardOpen() {
 };
 
 
-
-function disable(){
-    Array.prototype.filter.call(cards, function(card){
-        card.classList.add('disabled');
-    });
-}
-
-
-function enable(){
-    Array.prototype.filter.call(cards, function(card){
-        card.classList.remove('disabled');
-        for(var i = 0; i < matchedCard.length; i++){
-            matchedCard[i].classList.add("disabled");
-        }
-    });
-}
-
-
 for (var i = 0; i < card.length; i++){
   card = card[i];
   card.addEventListener("click", displayCard);
     card.addEventListener("click", cardOpen);
-    //card.addEventListener("click",congratulations);
 };
