@@ -11,16 +11,36 @@
     font-weight: 400;
     font-style: normal;
     background-image: linear-gradient(to left bottom, #001cb9, #006bf2, #00a1f8, #00d0e0, #46fac8);
+    background-size: cover;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    color:#ffffff;
+    color:#fff;
   }
+
+  header {
+    position: fixed;
+    top: 0;
+    text-align: center;
+    width: 100%;
+    padding: 1rem;
+    z-index: 100;
+  }
+    
+    nav a {
+      line-height: 4rem;
+      padding: 0 1rem;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: #fff;
+    }
+
+    
 
   h3 {
     font-size:1.2rem;
-    padding-top: 15rem;
+    padding-top: 10rem;
     padding-bottom: 2rem;
     padding-left: 5rem;
     padding-right: 5rem;
@@ -40,6 +60,7 @@
 
 .buttons { 
   text-align: center; margin-top: 2rem; 
+  text-decoration: none;
 } 
 
 .buttons a { 
@@ -49,6 +70,19 @@
 .buttons a:hover { 
   color: #fff; background-color: #00a1f8; 
 } 
+
+a:link { 
+  text-decoration: none; 
+} 
+a:visited { 
+  text-decoration: none; 
+} 
+a:hover { 
+  text-decoration: none; 
+} 
+a:active { 
+  text-decoration: none; 
+}
 
 .container {
     display: flex;
@@ -78,7 +112,7 @@
   background: #343434;
   box-shadow: 10px 10px 25px 0px 0rgba(45, 60, 70, 0.5);
   font-size:0;
-  color: #ffffff;
+  color: #00a1f8;
   border-radius: 5px;
   cursor: pointer;
   display: flex;
@@ -90,53 +124,54 @@
 
 .card.open {
   transform: rotateY(180deg);
-  background: #02b3e4;
+  background: #fff;
   cursor: default;
   animation-name: flipInX;
   -webkit-backface-visibility: visible !important;
   backface-visibility: visible !important;
-  animation-duration: .75s;
 }
 
 .card.show {
   font-size: 33px;
+  transform: rotateY(180deg);
 }
 
-
-.card.match {
-  cursor: default;
-  background: #46fac8;
-  font-size: 30px;
-  animation-name: rubberBand;
-  -webkit-backface-visibility: visable !important;
-  backface-visibility: visible !important;
-  animation-duration: .50s;
+/*
+.score {
+  text-align: left;
+  margin-bottom: 10px;
 }
 
-.card.unmatched {
-  animation-name: tada;
-  -webkit-backface-visibility: visable !important;
-  backface-visibility: visible !important;
-  animation-duration: .50s;
-  background: #ff9b83;
-}
- 
-header {
-  position: fixed;
-  top: 0;
-  text-align: center;
-  width: 100%;
-  padding: 1rem;
-  z-index: 100;
-}
-  
-  nav a {
-    line-height: 4rem;
-    padding: 0 1rem;
-    text-transform: uppercase;
-    text-decoration: none;
-    color: white;
+  .score .trophy {
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+    margin: 0 5px 0 0;
+
   }
+
+    .score .trophy li {
+      list-style: none;
+      display: inline-block;
+    }
+
+    .score .restart {
+      float: right;
+      cursor: pointer;
+    }
+
+
+  fa-trophy {
+    color: #fff;
+  }
+
+  .timer {
+    display: inline-block;
+    margin: 0 1rem;
+  }
+
+*/
+ 
 
 
   @keyframes flipInX {
@@ -165,7 +200,7 @@ header {
     }
 }
 
-@keyframes rubberBand {
+/*@keyframes rubberBand {
     from {
         transform: scale3d(1, 1, 1);
     }
@@ -208,6 +243,7 @@ header {
         transform: scale3d(1, 1, 1);
     }
 }
+*/
 
 
 @media (max-width: 320px) {

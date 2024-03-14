@@ -1,6 +1,6 @@
 const menuLinks = [
     {text: 'The Cause', href: 'index.html' },
-    {text: 'Play Game', href: 'game.html' },
+
   ];
   
   const MenuEl = document.querySelector('#menu');
@@ -17,21 +17,22 @@ const menuLinks = [
   
   });
 
-let card = document.getElementsByClassName("card");
 
+
+let card = Array.from(document.getElementsByClassName("card"));
 const icons = document.getElementById("all-icons");
-
 let closeicon = document.querySelector(".close");
-
 let modal = document.getElementById("popup1")
+const graphics = ["dolphin", "dolphin", "anchor", "anchor", "crab", "crab", "fish", "fish", "whale", "whale", "squid", "squid", "sailboat", "sailboat", "narwhal", "narwhal"];
+let firstCard, secondCard;
+let flippedCard = false;
+let lockBoard = false;
+let matchesFound = 0;
 
-//Glen helped troubleshoot here
-const banana = ["dolphin", "dolphin", "anchor", "anchor", "crab", "crab", "fish", "fish", "whale", "whale", "squid", "squid", "sailboat", "sailboat", "narwhal", "narwhal"];
-var openedCards = [];
+
 
 function shuffle(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
-
+    let currentIndex = array.length, temporaryValue, randomIndex;
     while (currentIndex !== 0) {
         randomIndex = Math.floor(Math.random() * currentIndex);
         currentIndex -= 1;
@@ -39,50 +40,85 @@ function shuffle(array) {
         array[currentIndex] = array[randomIndex];
         array[randomIndex] = temporaryValue;
     }
-
     return array;
 };
 
 document.body.onload = startGame();
 
+
+
 function startGame(){
- 
-    openedCards = [];
-
-  const shuffledCards = shuffle (banana);
-
-  console.log(shuffledCards);
+    const shuffledCards = shuffle (graphics);
     for (var i = 0; i < card.length; i++){
-      const iconEl = document.createElement("i");
+     const iconEl = document.createElement("i");
       iconEl.classList = `fa-solid fa-${shuffledCards[i]}`
-      card[i].appendChild(iconEl)
-    }
-    
+     card[i].appendChild(iconEl)
+   }  
+  }
+
+
+
+
+function displayCard() {
+  if (lockBoard) return;
+  if (this === firstCard) return;
+
+    this.classList.add('open', 'show');
+
+  if (!flippedCard) {
+    flippedCard = true;
+    firstCard = this;
+    return;
+  }
+ secondCard = this;
+ checkMatch();
 }
 
-var displayCard = function (){
-    this.classList.add("open");
-    this.classList.toggle("show");
-    this.classList.toggle("disabled");
+
+
+function reflipCard() {
+  lockBoard = true;
+
+  setTimeout(() => {
+    firstCard.classList.remove('open', 'show')
+    secondCard.classList.remove('open', 'show')
+    resetBoard()
+  }, 1000)
+}
+
+
+
+function resetBoard() {
+  flippedCard = false;
+  lockBoard = false;
+  firstCard = null;
+  secondCard = null;
+}
+
+
+
+function disableCard() {
+  firstCard.removeEventListener('click', displayCard)
+  secondCard.removeEventListener('click', displayCard)
+  resetBoard();
 };
 
 
-function cardOpen() {
-    openedCards.push(this);
-    var len = openedCards.length;
-    if(len === 2){
-        moveCounter();
-        if(openedCards[0].type === openedCards[1].type){
-            matched();
-        } else {
-            unmatched();
-        }
-    }
-};
+
+function checkMatch() {
+  const firstIcon = firstCard.querySelector('i').classList[1];
+  const secondIcon = secondCard.querySelector('i').classList[1];
+
+  let match = firstIcon === secondIcon;
+  match ? disableCard() : reflipCard()
+
+}
 
 
 for (var i = 0; i < card.length; i++){
-  card = card[i];
-  card.addEventListener("click", displayCard);
-    card.addEventListener("click", cardOpen);
+  card[i].addEventListener("click", displayCard);
+    
 };
+
+
+
